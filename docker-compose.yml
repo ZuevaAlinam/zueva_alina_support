@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:12
+    container_name: zueva_alina_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_DB: zueva_alina
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      network: host
+    container_name: zueva_alina_app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://postgres:changeme@db:5432/zueva_alina
+      APP_PORT: 8000
+      SECRET_KEY: changeme
+    ports:
+      - "8000:8000"
+
+volumes:
+  pgdata:

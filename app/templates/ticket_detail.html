@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Заявка #{{ ticket.id }}{% endblock %}
+{% block content %}
+<h1>Заявка #{{ ticket.id }}: {{ ticket.title }}</h1>
+<p><strong>Статус:</strong> {{ ticket.status }}</p>
+<p><strong>Категория:</strong> {{ ticket.category.name }} (норматив {{ ticket.category.reaction_norm_hours }} ч)</p>
+<p><strong>Автор:</strong> {{ ticket.author.username }}</p>
+<p><strong>Создана:</strong> {{ ticket.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+{% if ticket.first_response_at %}
+<p><strong>Первый ответ:</strong> {{ ticket.first_response_at.strftime('%Y-%m-%d %H:%M') }}</p>
+{% endif %}
+{% if ticket.closed_at %}
+<p><strong>Закрыта:</strong> {{ ticket.closed_at.strftime('%Y-%m-%d %H:%M') }}</p>
+{% endif %}
+
+<h2>Описание</h2>
+<p>{{ ticket.body }}</p>
+
+<h2>Комментарии ({{ comments|length }})</h2>
+{% for c in comments %}
+<div class="comment">
+    <p><strong>{{ c.author.username }}</strong> <em>{{ c.created_at.strftime('%Y-%m-%d %H:%M') }}</em></p>
+    <p>{{ c.body }}</p>
+</div>
+{% else %}
+<p>Комментариев пока нет.</p>
+{% endfor %}
+
+<p><a href="/tickets">← К списку заявок</a></p>
+{% endblock %}

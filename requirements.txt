@@ -1,0 +1,14 @@
+fastapi==0.95.2
+pydantic<2
+uvicorn==0.33.0
+sqlalchemy==2.0.35
+psycopg2-binary==2.9.10
+jinja2==3.1.6
+python-multipart==0.0.20
+passlib==1.7.4
+bcrypt==4.0.1
+itsdangerous==2.2.0
+python-dotenv==1.0.1
+pytest==8.3.5
+httpx==0.28.1
+faker==35.2.2

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Сводка{% endblock %}
+{% block content %}
+<h1>Сводка по заявкам</h1>
+
+<h2>Открытые заявки по категориям</h2>
+<table>
+    <thead>
+        <tr><th>Категория</th><th>Открытых заявок</th></tr>
+    </thead>
+    <tbody>
+        {% for name, count in data.open_by_category.items() %}
+        <tr><td>{{ name }}</td><td>{{ count }}</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Соблюдение норматива реакции</h2>
+<p>Заявок с первым ответом: <strong>{{ data.total_answered }}</strong></p>
+<p>Из них с нарушением норматива: <strong>{{ data.overdue_count }}</strong></p>
+<p>Доля нарушений: <strong>{{ (data.overdue_ratio * 100) | round(2) }}%</strong></p>
+{% endblock %}
