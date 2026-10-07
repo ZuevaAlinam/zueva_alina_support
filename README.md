@@ -6,7 +6,7 @@
 ## Установка и запуск
 
 ```bash
-git clone <адрес-репозитория>
+git clone https://github.com/ZuevaAlinam/zueva_alina_support
 cd zueva_alina_support
 
 python3 -m venv venv
